@@ -7,9 +7,12 @@ class ZapatoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomAppBar(
-        text: 'For You',
-      ),
-    );
+        body: Column(
+      children: [
+        CustomAppBar(text: 'For You'),
+        const SizedBox(height: 20),
+        ZapatoPreview(),
+      ],
+    ));
   }
 }
