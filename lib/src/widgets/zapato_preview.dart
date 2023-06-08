@@ -20,6 +20,7 @@ class ZapatoPreview extends StatelessWidget {
             _ZapatoConSombra(),
 
             // TODO tallas
+            _ZapatoTallas()
           ],
         ),
       ),
@@ -62,6 +63,54 @@ class _ZapatoSombra extends StatelessWidget {
         ),
         width: 230,
         height: 120,
+      ),
+    );
+  }
+}
+
+class _ZapatoTallas extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _TallaZapatoBox(size: 7),
+          _TallaZapatoBox(size: 7.5),
+          _TallaZapatoBox(size: 8),
+          _TallaZapatoBox(size: 8.5),
+          _TallaZapatoBox(size: 9),
+          _TallaZapatoBox(size: 9.5),
+        ],
+      ),
+    );
+  }
+}
+
+class _TallaZapatoBox extends StatelessWidget {
+  final double size;
+
+  const _TallaZapatoBox({super.key, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        size.toString().replaceAll(".0", ""),
+        style: TextStyle(
+          color: Color(0xfff1a23a),
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [],
       ),
     );
   }
