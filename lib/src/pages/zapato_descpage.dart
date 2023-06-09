@@ -7,7 +7,25 @@ class ZapatoDescriptionPAge extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          ZapatoPreview(fullScreen: true),
+          Stack(
+            children: [
+              ZapatoPreview(fullScreen: true),
+              Positioned(
+                top: 60,
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.chevron_left,
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                  elevation: 0,
+                  highlightElevation: 0,
+                  backgroundColor: Colors.transparent,
+                ),
+              )
+            ],
+          ),
           Expanded(
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
@@ -19,13 +37,61 @@ class ZapatoDescriptionPAge extends StatelessWidget {
                         "The Nike Air Max 720 goes bigger than ever before with Nike's taller Air unit yet, offering more air underfoot for unimaginable, all-day comfort. Has Air Max gone too far? We hope so.",
                   ),
                   _MontoBuyNow(),
-                  ColorsAndMore()
+                  ColorsAndMore(),
+                  _BtnsLikeCartSettings()
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _BtnsLikeCartSettings extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _BtnWithShadow(icon: Icon(Icons.star, color: Colors.red, size: 25)),
+          _BtnWithShadow(
+              icon: Icon(Icons.shopping_bag,
+                  color: Colors.grey.withOpacity(0.4), size: 25)),
+          _BtnWithShadow(
+              icon: Icon(Icons.settings,
+                  color: Colors.grey.withOpacity(0.4), size: 25)),
+        ],
+      ),
+    );
+  }
+}
+
+class _BtnWithShadow extends StatelessWidget {
+  final Icon icon;
+
+  const _BtnWithShadow({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: icon,
+      width: 55,
+      height: 55,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: -5,
+                blurRadius: 20,
+                offset: Offset(0, 10))
+          ]),
     );
   }
 }
