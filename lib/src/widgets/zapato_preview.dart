@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:zapatos_app/src/pages/zapato_descpage.dart';
 
 class ZapatoPreview extends StatelessWidget {
   final bool fullScreen;
@@ -9,25 +10,35 @@ class ZapatoPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: (fullScreen) ? 5 : 30,
-        vertical: (fullScreen) ? 5 : 0,
-      ),
-      child: Container(
-        width: double.infinity,
-        height: (fullScreen) ? 410 : 430,
-        decoration: BoxDecoration(
-          color: Color(0xffFFCF53),
-          borderRadius: BorderRadius.circular(50),
+    return GestureDetector(
+      onTap: () {
+        if (!this.fullScreen) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return ZapatoDescriptionPAge();
+          }));
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: (fullScreen) ? 5 : 30,
+          vertical: (fullScreen) ? 5 : 0,
         ),
-        child: Column(
-          children: [
-            // Zapato con sombra
-            _ZapatoConSombra(),
+        child: Container(
+          width: double.infinity,
+          height: (fullScreen) ? 410 : 430,
+          decoration: BoxDecoration(
+            color: Color(0xffFFCF53),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Column(
+            children: [
+              // Zapato con sombra
+              _ZapatoConSombra(),
 
-            if (!fullScreen) _ZapatoTallas()
-          ],
+              if (!fullScreen) _ZapatoTallas()
+            ],
+          ),
         ),
       ),
     );
