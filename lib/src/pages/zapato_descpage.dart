@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zapatos_app/src/models/zapato_model.dart';
 import 'package:zapatos_app/src/widgets/custom_widgets.dart';
 
 class ZapatoDescriptionPAge extends StatelessWidget {
@@ -114,14 +116,26 @@ class ColorsAndMore extends StatelessWidget {
             children: [
               Positioned(
                   left: 90,
-                  child: _CircleColor(color: Color(0xffc6d642), index: 4)),
+                  child: _CircleColor(
+                      color: Color(0xffc6d642),
+                      index: 4,
+                      assetImageName: 'assets/imgs/verde.png')),
               Positioned(
                   left: 60,
-                  child: _CircleColor(color: Color(0xffffad29), index: 3)),
+                  child: _CircleColor(
+                      color: Color(0xffffad29),
+                      index: 3,
+                      assetImageName: 'assets/imgs/amarillo.png')),
               Positioned(
                   left: 30,
-                  child: _CircleColor(color: Color(0xff2099f1), index: 2)),
-              _CircleColor(color: Color(0xff364d56), index: 1),
+                  child: _CircleColor(
+                      color: Color(0xff2099f1),
+                      index: 2,
+                      assetImageName: 'assets/imgs/azul.png')),
+              _CircleColor(
+                  color: Color(0xff364d56),
+                  index: 1,
+                  assetImageName: 'assets/imgs/negro.png'),
             ],
           )),
           OrangeBtn(
@@ -138,20 +152,28 @@ class ColorsAndMore extends StatelessWidget {
 class _CircleColor extends StatelessWidget {
   final Color color;
   final int index;
+  final String assetImageName;
 
-  _CircleColor({required this.color, required this.index});
+  _CircleColor(
+      {required this.color, required this.index, required this.assetImageName});
 
   @override
   Widget build(BuildContext context) {
     return FadeInLeft(
       delay: Duration(milliseconds: index * 100),
       duration: Duration(milliseconds: 700),
-      child: Container(
-        width: 45,
-        height: 45,
-        decoration: BoxDecoration(
-          color: color,
-          shape: BoxShape.circle,
+      child: GestureDetector(
+        onTap: () {
+          final zapatoModel = Provider.of<ZapatoModel>(context, listen: false);
+          zapatoModel.assetImage = assetImageName;
+        },
+        child: Container(
+          width: 45,
+          height: 45,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
         ),
       ),
     );
