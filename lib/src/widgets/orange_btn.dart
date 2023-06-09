@@ -4,11 +4,13 @@ class OrangeBtn extends StatelessWidget {
   final String text;
   final double height;
   final double width;
+  final Color color;
 
-  const OrangeBtn({
+  OrangeBtn({
     required this.text,
     this.height = 50,
     this.width = 150,
+    this.color = Colors.orange,
   });
 
   @override
@@ -18,7 +20,7 @@ class OrangeBtn extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100), color: Colors.orange),
+          borderRadius: BorderRadius.circular(100), color: this.color),
       child: Text(
         text,
         style: TextStyle(color: Colors.white),
