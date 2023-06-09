@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zapatos_app/src/models/zapato_model.dart';
 import 'package:zapatos_app/src/pages/zapato_descpage.dart';
 
 class ZapatoPreview extends StatelessWidget {
@@ -112,29 +114,38 @@ class _TallaZapatoBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        size.toString().replaceAll(".0", ""),
-        style: TextStyle(
-          color: (size != 9.0) ? Color(0xfff1a23a) : Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+    final zapatomodel = Provider.of<ZapatoModel>(context);
+
+    return GestureDetector(
+      onTap: () {
+        final zapatomodel = Provider.of<ZapatoModel>(context, listen: false);
+        zapatomodel.talla = this.size;
+      },
+      child: Container(
+        alignment: Alignment.center,
+        child: Text(
+          size.toString().replaceAll(".0", ""),
+          style: TextStyle(
+            color:
+                (size != zapatomodel.talla) ? Color(0xfff1a23a) : Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: (size == 9.0) ? Color(0xfff1a23a) : Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          if (size == 9.0)
-            BoxShadow(
-              color: Color(0xfff1a23a),
-              blurRadius: 10,
-              offset: Offset(0, 5),
-            )
-        ],
+        width: 45,
+        height: 45,
+        decoration: BoxDecoration(
+          color: (size == zapatomodel.talla) ? Color(0xfff1a23a) : Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            if (size == zapatomodel.talla)
+              BoxShadow(
+                color: Color(0xfff1a23a),
+                blurRadius: 10,
+                offset: Offset(0, 5),
+              )
+          ],
+        ),
       ),
     );
   }
